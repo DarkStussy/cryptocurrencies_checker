@@ -1,13 +1,10 @@
 from aiogram import types
-from aiogram.types import ContentType, ParseMode
-from aiogram.utils.markdown import code, text
-
+from aiogram.types import ContentType
 from loader import dp
 
 
 @dp.message_handler(content_types=ContentType.ANY)
 async def unknown_message(message: types.Message):
-    message_text = 'Мои функции слегка ограничены, поэтому я не могу отвечать на всё \n' + code('Команда: ') + text(
-        "/help")
+    message_text = 'My features are slightly limited so I can\'t reply to everything.'
 
-    await message.reply(message_text, parse_mode=ParseMode.MARKDOWN)
+    await message.reply(message_text)

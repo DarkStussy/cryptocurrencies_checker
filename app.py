@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker
 from db.base import Base
 from loader import bot
 from aiogram import Dispatcher
-from scheduler.main import scheduler
+from scheduler.start import scheduler
 
 
 async def on_startup(dp):

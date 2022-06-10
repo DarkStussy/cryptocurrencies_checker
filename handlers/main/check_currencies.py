@@ -1,6 +1,4 @@
 from aiogram import types
-from aiogram.utils.markdown import italic
-from sqlalchemy import select
 
 from db.models import User
 from loader import dp
@@ -9,8 +7,8 @@ from data.config import get_crypto_now
 
 @dp.message_handler(commands=['check'])
 async def check_currencies(message: types.Message):
-    btc_now = get_crypto_now("BTC", "USD")
-    eth_now = get_crypto_now("ETH", "USD")
+    btc_now = await get_crypto_now("bitcoin", "usd")
+    eth_now = await get_crypto_now("ethereum", "usd")
     msg = ""
     db_session = dp.bot.get("db")
     async with db_session() as session:

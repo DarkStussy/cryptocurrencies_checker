@@ -6,7 +6,7 @@ from .currencies import diff_currency
 
 
 async def scheduler():
-    aioschedule.every(1).hours.do(diff_currency)
+    aioschedule.every(5).seconds.do(diff_currency)
     while True:
         await aioschedule.run_pending()
         await asyncio.sleep(1)
