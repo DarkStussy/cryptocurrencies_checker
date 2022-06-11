@@ -48,7 +48,8 @@ async def track_btc_state(message: types.Message, state: FSMContext):
     else:
         current = cryptocompare.get_price("BTC", currency='USD')['BTC']['USD']
         await db_merge_currency(user_id=message.chat.id, difference=diff, btc_value=current)
-        await message.answer(text=f'BTC: {current} USD\n\n'
+        await message.answer(text=f'BTC: {current} USD\n'
+                                  f'Difference: {diff}$\n\n'
                                   f'To check the changes, enter the command: /check')
         await state.finish()
 
@@ -62,6 +63,7 @@ async def track_eth_state(message: types.Message, state: FSMContext):
     else:
         current = cryptocompare.get_price("ETH", currency='USD')['ETH']['USD']
         await db_merge_currency(user_id=message.chat.id, difference=diff, eth_value=current)
-        await message.answer(text=f'ETH: {current} USD\n\n'
+        await message.answer(text=f'ETH: {current} USD\n'
+                                  f'Difference: {diff}$\n\n'
                                   f'To check the changes, enter the command: /check')
         await state.finish()
