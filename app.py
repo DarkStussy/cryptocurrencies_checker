@@ -1,4 +1,5 @@
 import asyncio
+import os
 
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
@@ -16,7 +17,9 @@ async def on_startup(dp):
     from utils.set_bot_commands import set_default_commands
     await set_default_commands(dp)
 
-    engine = create_async_engine('sqlite+aiosqlite:///database.db', echo=True, future=True)
+    engine = create_async_engine(
+        f'postgresql+asyncpg://{os.getenv("PG_USERNAME")}:{os.getenv("PG_PASSWORD")}@localhost/'
+        f'{os.getenv("PG_DATABASE")}', echo=True, future=True)
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
 
