@@ -2,6 +2,7 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.types import ContentTypes
 
+from data.config import get_crypto_now
 from db.models import User
 from loader import dp
 import cryptocompare
@@ -46,7 +47,7 @@ async def track_btc_state(message: types.Message, state: FSMContext):
     except ValueError:
         await message.answer("Enter number!")
     else:
-        current = cryptocompare.get_price("BTC", currency='USD')['BTC']['USD']
+        current = await get_crypto_now("BTC", "USD")
         await db_merge_currency(user_id=message.chat.id, difference=diff, btc_value=current)
         await message.answer(text=f'BTC: {current} USD\n'
                                   f'Difference: {diff}$\n\n'
@@ -61,7 +62,7 @@ async def track_eth_state(message: types.Message, state: FSMContext):
     except ValueError:
         await message.answer("Enter number!")
     else:
-        current = cryptocompare.get_price("ETH", currency='USD')['ETH']['USD']
+        current = await get_crypto_now("ETH", "USD")
         await db_merge_currency(user_id=message.chat.id, difference=diff, eth_value=current)
         await message.answer(text=f'ETH: {current} USD\n'
                                   f'Difference: {diff}$\n\n'

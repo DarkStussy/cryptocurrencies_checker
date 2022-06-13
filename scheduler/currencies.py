@@ -33,10 +33,10 @@ async def diff_currency():
         users = users_request.scalars()
     for i in users:
         if i.btc_value and not i.is_checked_btc:
-            btc_now = await get_crypto_now("bitcoin", "usd")
+            btc_now = await get_crypto_now("BTC", "USD")
             await check_diff(value=i.btc_value, now=btc_now, difference=i.difference_btc, user_id=i.user_id,
                              name="BTC")
         if i.eth_value and not i.is_checked_eth:
-            eth_now = await get_crypto_now("ethereum", "usd")
+            eth_now = await get_crypto_now("ETH", "USD")
             await check_diff(value=i.eth_value, now=eth_now, difference=i.difference_eth, user_id=i.user_id,
                              name="ETH")

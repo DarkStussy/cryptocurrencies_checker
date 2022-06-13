@@ -12,7 +12,8 @@ admin_id = 1026151741
 
 async def get_crypto_now(name: str, currency: str):
     async with aiohttp.ClientSession() as session:
-        currency_url = f"https://api.coingecko.com/api/v3/coins/{name}"
+        currency_url = f"https://min-api.cryptocompare.com/data/price?fsym={name}&tsyms={currency}&api_key=" \
+                       f"{os.getenv('CRPT_KEY')}"
         async with session.get(currency_url) as resp:
-            pokemon = await resp.json()
-            return pokemon['market_data']['current_price'][currency]
+            currency_price = await resp.json()
+            return currency_price['USD']
