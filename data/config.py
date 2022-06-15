@@ -12,8 +12,7 @@ admin_id = 1026151741
 
 async def get_crypto_now(name: str, currency: str):
     async with aiohttp.ClientSession() as session:
-        currency_url = f"https://min-api.cryptocompare.com/data/price?fsym={name}&tsyms={currency}&api_key=" \
-                       f"{os.getenv('CRPT_KEY')}"
+        currency_url = f"https://api.binance.com/api/v3/ticker/price?symbol={name}{currency}"
         async with session.get(currency_url) as resp:
             currency_price = await resp.json()
-            return currency_price['USD']
+            return currency_price['price']

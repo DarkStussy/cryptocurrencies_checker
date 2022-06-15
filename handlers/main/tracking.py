@@ -5,7 +5,6 @@ from aiogram.types import ContentTypes
 from data.config import get_crypto_now
 from db.models import User
 from loader import dp
-import cryptocompare
 
 from states import GetDiff
 
@@ -43,14 +42,15 @@ async def callback_track_eth(callback_query: types.CallbackQuery):
 @dp.message_handler(state=GetDiff.difference_btc, content_types=ContentTypes.TEXT)
 async def track_btc_state(message: types.Message, state: FSMContext):
     try:
-        diff = float(message.text)
+        diff = round(float(message.text), 2)
     except ValueError:
         await message.answer("Enter number!")
     else:
-        current = await get_crypto_now("BTC", "USD")
+        current = await get_crypto_now("BTC", "EUR")
+        current = round(float(current), 2)
         await db_merge_currency(user_id=message.chat.id, difference=diff, btc_value=current)
-        await message.answer(text=f'BTC: {current} USD\n'
-                                  f'Difference: {diff}$\n\n'
+        await message.answer(text=f'BTC: {current} EUR\n'
+                                  f'Difference: {diff}€\n\n'
                                   f'To check the changes, enter the command: /check')
         await state.finish()
 
@@ -58,13 +58,14 @@ async def track_btc_state(message: types.Message, state: FSMContext):
 @dp.message_handler(state=GetDiff.difference_eth, content_types=ContentTypes.TEXT)
 async def track_eth_state(message: types.Message, state: FSMContext):
     try:
-        diff = float(message.text)
+        diff = round(float(message.text), 2)
     except ValueError:
         await message.answer("Enter number!")
     else:
-        current = await get_crypto_now("ETH", "USD")
-        await db_merge_currency(user_id=message.chat.id, difference=diff, eth_value=current)
-        await message.answer(text=f'ETH: {current} USD\n'
-                                  f'Difference: {diff}$\n\n'
+        current = await get_crypto_now("ETH", "EUR")
+        current = round(float(current), 2)
+        await db_merge_currency(user_id=message.chat.id, difference=diff, eth_value=round(float(current), 2))
+        await message.answer(text=f'ETH: {current} €\n'
+                                  f'Difference: {diff}€\n\n'
                                   f'To check the changes, enter the command: /check')
         await state.finish()
