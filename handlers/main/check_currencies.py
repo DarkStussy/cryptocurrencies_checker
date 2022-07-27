@@ -23,4 +23,16 @@ async def check_currencies(message: types.Message):
         msg += f"ETH:\nLast request: {user.eth_value}€\nCurrent ETH: {eth_now}€\nDifference since last request:\n" \
                f" {round(eth_now - user.eth_value, 2)}€, {round(100.0 - (user.eth_value * 100 / eth_now), 2)}%\n\n"
 
+    if user.bnb_value:
+        bnb_now = await get_crypto_now("BNB", "EUR")
+        bnb_now = round(float(bnb_now), 2)
+        msg += f"BNB:\nLast request: {user.bnb_value}€\nCurrent BNB: {bnb_now}€\nDifference since last request:\n" \
+               f" {round(bnb_now - user.bnb_value, 2)}€, {round(100.0 - (user.bnb_value * 100 / bnb_now), 2)}%\n\n"
+
+    if user.dot_value:
+        dot_now = await get_crypto_now("DOT", "EUR")
+        dot_now = round(float(dot_now), 2)
+        msg += f"DOT:\nLast request: {user.dot_value}€\nCurrent DOT: {dot_now}€\nDifference since last request:\n" \
+               f" {round(dot_now - user.dot_value, 2)}€, {round(100.0 - (user.dot_value * 100 / dot_now), 2)}%\n\n"
+
     await message.answer(text=msg)
