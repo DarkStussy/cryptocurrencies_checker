@@ -35,13 +35,19 @@ Installing the required dependencies
 
 Create an .env file at the root of the project and paste:
 
-  <sub>BOT_TOKEN=your-bot-token
-  PG_HOST=postgres-host(default:localhost)
-  PG_USERNAME=postgres-username
-  PG_PASSWORD=postgres-password
-  PG_DATABASE=postgres-database
-  BINANCE_API_KEY=binance-api-key
-  BINANCE_API_SECRET=binance-api-secret</sub>
+  <sub>BOT_TOKEN=your-bot-token</sub>
+  
+  <sub>PG_HOST=postgres-host(default:localhost)</sub>
+  
+  <sub>PG_USERNAME=postgres-username</sub>
+  
+  <sub>PG_PASSWORD=postgres-password</sub>
+  
+  <sub>PG_DATABASE=postgres-database</sub>
+  
+  <sub>BINANCE_API_KEY=binance-api-key</sub>
+  
+  <sub>BINANCE_API_SECRET=binance-api-secret</sub>
   
 And run the bot: 
 
