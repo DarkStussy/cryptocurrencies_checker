@@ -38,18 +38,18 @@ Create an .env file at the root of the project and paste:
   BOT_TOKEN=<your bot token>
   
   
-  PG_HOST=<postgres host(default:localhost)>
+  PG_HOST=<postgres-host(default:localhost)>
   
-  PG_USERNAME=<postgres username>
+  PG_USERNAME=<postgres-username>
   
-  PG_PASSWORD=<postgres password>
+  PG_PASSWORD=<postgres-password>
   
-  PG_DATABASE=<postgres database>
+  PG_DATABASE=<postgres-database>
   
 
-  BINANCE_API_KEY=<binance api key>
+  BINANCE_API_KEY=<binance-api-key>
   
-  BINANCE_API_SECRET=<binance api secret>
+  BINANCE_API_SECRET=<binance-api-secret>
   
 And run the bot: 
 
