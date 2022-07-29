@@ -14,6 +14,11 @@ async def send_menu(message: types.Message):
     await message.answer('Binance menu: ', reply_markup=binance_inline_kb)
 
 
+@dp.callback_query_handler(lambda c: c.data == 'exit_binance')
+async def callback_exit_binance(callback_query: types.CallbackQuery):
+    await dp.bot.delete_message(chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id)
+
+
 @dp.callback_query_handler(lambda c: c.data == 'check_balance')
 async def callback_check_balance(callback_query: types.CallbackQuery):
     await dp.bot.edit_message_reply_markup(callback_query.message.chat.id, callback_query.message.message_id,

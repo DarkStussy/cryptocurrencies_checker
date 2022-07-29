@@ -8,6 +8,8 @@ from loader import dp
 
 from states import GetDiff
 
+from keyboard.inline import inline_kb_main
+
 
 async def db_merge_currency(user_id: int, difference: float, btc_value: float = None, eth_value: float = None,
                             bnb_value: float = None, dot_value: float = None):
@@ -30,7 +32,6 @@ async def db_merge_currency(user_id: int, difference: float, btc_value: float = 
 
 @dp.callback_query_handler(lambda c: c.data == 'btc_track')
 async def callback_track_btc(callback_query: types.CallbackQuery):
-    await dp.bot.answer_callback_query(callback_query.id)
     await dp.bot.edit_message_reply_markup(callback_query.message.chat.id, callback_query.message.message_id,
                                            reply_markup=None)
     await dp.bot.send_message(chat_id=callback_query.message.chat.id, text='Enter difference for change notification:')
@@ -39,7 +40,6 @@ async def callback_track_btc(callback_query: types.CallbackQuery):
 
 @dp.callback_query_handler(lambda c: c.data == 'eth_track')
 async def callback_track_eth(callback_query: types.CallbackQuery):
-    await dp.bot.answer_callback_query(callback_query.id)
     await dp.bot.edit_message_reply_markup(callback_query.message.chat.id, callback_query.message.message_id,
                                            reply_markup=None)
     await dp.bot.send_message(chat_id=callback_query.message.chat.id, text='Enter difference for change notification:')
@@ -48,7 +48,6 @@ async def callback_track_eth(callback_query: types.CallbackQuery):
 
 @dp.callback_query_handler(lambda c: c.data == 'bnb_track')
 async def callback_track_bnb(callback_query: types.CallbackQuery):
-    await dp.bot.answer_callback_query(callback_query.id)
     await dp.bot.edit_message_reply_markup(callback_query.message.chat.id, callback_query.message.message_id,
                                            reply_markup=None)
     await dp.bot.send_message(chat_id=callback_query.message.chat.id, text='Enter difference for change notification:')
@@ -57,11 +56,16 @@ async def callback_track_bnb(callback_query: types.CallbackQuery):
 
 @dp.callback_query_handler(lambda c: c.data == 'dot_track')
 async def callback_track_dot(callback_query: types.CallbackQuery):
-    await dp.bot.answer_callback_query(callback_query.id)
     await dp.bot.edit_message_reply_markup(callback_query.message.chat.id, callback_query.message.message_id,
                                            reply_markup=None)
     await dp.bot.send_message(chat_id=callback_query.message.chat.id, text='Enter difference for change notification:')
     await GetDiff.difference_dot.set()
+
+
+@dp.callback_query_handler(lambda c: c.data == 'exit_tracking')
+async def callback_exit_tracking(callback_query: types.CallbackQuery):
+    await dp.bot.edit_message_reply_markup(callback_query.message.chat.id, callback_query.message.message_id,
+                                           reply_markup=inline_kb_main)
 
 
 @dp.message_handler(state=GetDiff.difference_btc, content_types=ContentTypes.TEXT)

@@ -18,7 +18,7 @@ async def on_startup(dp):
     await set_default_commands(dp)
 
     engine = create_async_engine(
-        f'postgresql+asyncpg://{os.getenv("PG_USERNAME")}:{os.getenv("PG_PASSWORD")}@localhost/'
+        f'postgresql+asyncpg://{os.getenv("PG_USERNAME")}:{os.getenv("PG_PASSWORD")}@{os.getenv("PG_HOST")}/'
         f'{os.getenv("PG_DATABASE")}', echo=True, future=True)
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)

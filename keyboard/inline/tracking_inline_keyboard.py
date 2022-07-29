@@ -4,5 +4,6 @@ inline_btn_btc_track = InlineKeyboardButton('Track BITCOIN', callback_data='btc_
 inline_btn_eth_track = InlineKeyboardButton('Track ETHEREUM', callback_data='eth_track')
 inline_btn_bnb_track = InlineKeyboardButton('Track BINANCE COIN', callback_data='bnb_track')
 inline_btn_dot_track = InlineKeyboardButton('Track POLKADOT', callback_data='dot_track')
-inline_kb_main = InlineKeyboardMarkup().add(inline_btn_btc_track).add(inline_btn_eth_track).add(
-    inline_btn_bnb_track).add(inline_btn_dot_track)
+inline_btn_exit = InlineKeyboardButton('Exit', callback_data='exit_tracking')
+inline_kb_tracking_prices = InlineKeyboardMarkup().add(inline_btn_btc_track).add(inline_btn_eth_track).add(
+    inline_btn_bnb_track).add(inline_btn_dot_track).add(inline_btn_exit)
