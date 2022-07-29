@@ -21,8 +21,7 @@ async def callback_exit_binance(callback_query: types.CallbackQuery):
 
 @dp.callback_query_handler(lambda c: c.data == 'check_balance')
 async def callback_check_balance(callback_query: types.CallbackQuery):
-    await dp.bot.edit_message_reply_markup(callback_query.message.chat.id, callback_query.message.message_id,
-                                           reply_markup=None)
+    await dp.bot.delete_message(chat_id=callback_query.message.chat.id, message_id=callback_query.message.message_id)
     client = await AsyncClient.create(api_key=os.getenv("BINANCE_API_KEY"), api_secret=os.getenv("BINANCE_API_SECRET"))
 
     balance_btc = await client.get_asset_balance(asset='BTC')
